@@ -5,6 +5,9 @@
 package it.daddo.agenda.logic;
 
 import it.daddo.agenda.db.DBManager;
+import it.daddo.agenda.logic.exceptions.EmptyFieldException;
+import it.daddo.agenda.logic.exceptions.LoginField;
+import it.daddo.agenda.logic.exceptions.NullFieldException;
 import java.util.List;
 
 /**
@@ -25,7 +28,19 @@ public class LoginManager {
         super();
     }
     
-    public User login(String username,String password){
+    public User login(String username,String password) throws NullFieldException, EmptyFieldException{
+        if(username==null){
+            throw new NullFieldException(LoginField.USER);
+        }
+        if(password==null){
+            throw new NullFieldException(LoginField.PASSWORD);
+        }
+        if(username.isBlank()){
+            throw new EmptyFieldException(LoginField.USER);
+        }
+        if(password.isBlank()){
+            throw new EmptyFieldException(LoginField.PASSWORD);
+        }
         List<User> users = DBManager.getInstance().getAllUsers();
         for (User user : users) {
             if(username.equals(user.getUsername())){

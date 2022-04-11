@@ -4,6 +4,12 @@
  */
 package it.daddo.agenda.gui.login;
 
+import it.daddo.agenda.logic.LoginManager;
+import it.daddo.agenda.logic.exceptions.EmptyFieldException;
+import it.daddo.agenda.logic.exceptions.NullFieldException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Anna
@@ -21,7 +27,7 @@ public class LoginFrame extends javax.swing.JFrame {
         this.jLabel_errori.setText("");
         this.jLabel_error_password.setVisible(false);
         this.jLabel_error_username.setVisible(false);
-        
+
     }
 
     /**
@@ -36,7 +42,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel_Logo = new javax.swing.JLabel();
         jTextField_username = new javax.swing.JTextField();
-        jTextField_username1 = new javax.swing.JTextField();
+        jTextField_password = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jToolBar1 = new javax.swing.JToolBar();
         jButton2 = new javax.swing.JButton();
@@ -62,9 +68,9 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField_username1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTextField_username1.setForeground(new java.awt.Color(102, 204, 255));
-        jTextField_username1.setText("Password");
+        jTextField_password.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jTextField_password.setForeground(new java.awt.Color(102, 204, 255));
+        jTextField_password.setText("Password");
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton1.setText("Accedi");
@@ -109,7 +115,7 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel_Logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jTextField_username)
-                            .addComponent(jTextField_username1, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
+                            .addComponent(jTextField_password, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                             .addComponent(jLabel_errori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,7 +140,7 @@ public class LoginFrame extends javax.swing.JFrame {
                     .addComponent(jLabel_error_username, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField_username1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_error_password, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel_errori, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
@@ -162,7 +168,15 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField_usernameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String username = this.jTextField_username.getText();
+        String password = this.jTextField_password.getText();
+        try {
+            LoginManager.getInstance().login(username, password);
+        } catch (NullFieldException ex) {
+            this.jLabel_errori.setText(ex.getMessage());
+        } catch (EmptyFieldException ex) {
+            this.jLabel_errori.setText(ex.getMessage());
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -212,8 +226,8 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel_error_username;
     private javax.swing.JLabel jLabel_errori;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField_password;
     private javax.swing.JTextField jTextField_username;
-    private javax.swing.JTextField jTextField_username1;
     private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
 }
