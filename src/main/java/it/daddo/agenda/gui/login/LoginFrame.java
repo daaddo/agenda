@@ -4,11 +4,9 @@
  */
 package it.daddo.agenda.gui.login;
 
+import it.daddo.agenda.gui.MainFrame;
 import it.daddo.agenda.logic.LoginManager;
-import it.daddo.agenda.logic.exceptions.EmptyFieldException;
-import it.daddo.agenda.logic.exceptions.NullFieldException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import it.daddo.agenda.logic.exceptions.LoginException;
 
 /**
  *
@@ -172,9 +170,14 @@ public class LoginFrame extends javax.swing.JFrame {
         String password = this.jTextField_password.getText();
         try {
             LoginManager.getInstance().login(username, password);
-        } catch (NullFieldException ex) {
-            this.jLabel_errori.setText(ex.getMessage());
-        } catch (EmptyFieldException ex) {
+            this.setVisible(false);
+            this.dispose();
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new MainFrame().setVisible(true);
+                }
+            });
+        } catch (LoginException ex) {
             this.jLabel_errori.setText(ex.getMessage());
         }
     }//GEN-LAST:event_jButton1ActionPerformed

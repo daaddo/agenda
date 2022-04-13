@@ -6,8 +6,11 @@ package it.daddo.agenda.logic;
 
 import it.daddo.agenda.db.DBManager;
 import it.daddo.agenda.logic.exceptions.EmptyFieldException;
+import it.daddo.agenda.logic.exceptions.LoginException;
 import it.daddo.agenda.logic.exceptions.LoginField;
 import it.daddo.agenda.logic.exceptions.NullFieldException;
+import it.daddo.agenda.logic.exceptions.PasswordMismatchException;
+import it.daddo.agenda.logic.exceptions.UserNotExistingException;
 import java.util.List;
 
 /**
@@ -28,7 +31,7 @@ public class LoginManager {
         super();
     }
     
-    public User login(String username,String password) throws NullFieldException, EmptyFieldException{
+    public User login(String username,String password) throws LoginException{
         if(username==null){
             throw new NullFieldException(LoginField.USER);
         }
@@ -47,8 +50,9 @@ public class LoginManager {
                 if(password.equals(user.getPassword())){
                     return user;
                 }
+                throw new PasswordMismatchException();
             }
         }
-        return null;
+        throw new UserNotExistingException();
     }
 }
