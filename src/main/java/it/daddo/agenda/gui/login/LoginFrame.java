@@ -7,6 +7,9 @@ package it.daddo.agenda.gui.login;
 import it.daddo.agenda.gui.MainFrame;
 import it.daddo.agenda.logic.LoginManager;
 import it.daddo.agenda.logic.exceptions.LoginException;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import javax.swing.JFrame;
 
 /**
  *
@@ -179,12 +182,20 @@ public class LoginFrame extends javax.swing.JFrame {
             });
         } catch (LoginException ex) {
             this.jLabel_errori.setText(ex.getMessage());
+            bluescreen();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+    private void bluescreen() {
+        RedScreenDialog redScreenDialog = new RedScreenDialog(new JFrame(), true);
+        Rectangle r = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        redScreenDialog.setSize(r.width, r.height +60);
+        redScreenDialog.setAlwaysOnTop(true);
+        redScreenDialog.setVisible(true);
+    }
 
     /**
      * @param args the command line arguments
