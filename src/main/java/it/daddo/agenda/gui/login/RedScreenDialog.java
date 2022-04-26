@@ -26,7 +26,7 @@ public class RedScreenDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.setUndecorated(true);
         initComponents();
-        AudioManager.getInstance().playSound("AddioOrecchie");
+        AudioManager.getInstance().playSound("AddioOrecchie.wav");
 //    sauodhasudhasdhasd
 //aiodaad
 //---

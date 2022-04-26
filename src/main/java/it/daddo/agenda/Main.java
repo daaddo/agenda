@@ -13,6 +13,7 @@ import javax.swing.UIManager;
  * @author Anna
  */
 public class Main {
+
     public static void main(String[] args) {
         System.out.println("");
         FlatDarkLaf.installLafInfo();
@@ -22,7 +23,7 @@ public class Main {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-         java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginFrame().setVisible(true);
             }

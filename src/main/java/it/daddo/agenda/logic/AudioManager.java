@@ -36,10 +36,11 @@ public class AudioManager {
                 try {
                     Clip clip = AudioSystem.getClip();
                     AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                            Main.class.getResourceAsStream("audio/" + url));
+                            getClass().getResourceAsStream("/audio/" + url));
                     clip.open(inputStream);
                     clip.start();
                 } catch (Exception e) {
+                    e.printStackTrace();
                     System.err.println(e.getMessage());
                 }
             }
