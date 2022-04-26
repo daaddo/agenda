@@ -4,6 +4,7 @@
  */
 package it.daddo.agenda.gui.login;
 
+import it.daddo.agenda.logic.AudioManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
@@ -25,6 +26,7 @@ public class RedScreenDialog extends javax.swing.JDialog {
         super(parent, modal);
         this.setUndecorated(true);
         initComponents();
+        AudioManager.getInstance().playSound("AddioOrecchie");
 //    sauodhasudhasdhasd
 //aiodaad
 //---
