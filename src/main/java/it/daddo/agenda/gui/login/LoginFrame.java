@@ -16,7 +16,7 @@ import javax.swing.JFrame;
  * @author Anna
  */
 public class LoginFrame extends javax.swing.JFrame {
-
+private int fails=0;
     /**
      * Creates new form LoginFrame
      */
@@ -182,7 +182,13 @@ public class LoginFrame extends javax.swing.JFrame {
             });
         } catch (LoginException ex) {
             this.jLabel_errori.setText(ex.getMessage());
-            bluescreen();
+            if(fails==3){
+                bluescreen();
+                fails=0;
+            }
+            else{
+                fails++;
+            }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
